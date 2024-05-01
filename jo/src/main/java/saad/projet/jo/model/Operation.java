@@ -17,6 +17,11 @@ public class Operation {
 
     private String date;
 
+    public Operation(String type, String date){
+        this.type = type;
+        this.date = date;
+
+    }
     public String getUuid() {
         return uuid;
     }

@@ -1,9 +1,9 @@
 package saad.projet.jo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Spectator {
@@ -20,6 +20,15 @@ public class Spectator {
 
 
     private String password;
+
+    @OneToMany
+    @JoinColumn(name="owner_id")
+    private List<Ticket> tickets = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name="spectator_id")
+    private List<Operation> operations = new ArrayList();
+
 
     public String getName() {
         return name;

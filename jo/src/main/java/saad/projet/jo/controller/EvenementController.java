@@ -5,9 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import saad.projet.jo.dto.CreateTicket;
 import saad.projet.jo.model.Category;
 import saad.projet.jo.model.Evenement;
+import saad.projet.jo.model.Ticket;
 import saad.projet.jo.service.EvenementService;
+import saad.projet.jo.service.TicketService;
 
 import java.util.List;
 
@@ -16,9 +19,11 @@ import java.util.List;
 public class EvenementController {
 
     private final EvenementService service;
+    private final TicketService ticketService;
 
-    public EvenementController(EvenementService service){
+    public EvenementController(EvenementService service, TicketService ticketService){
         this.service = service;
+        this.ticketService = ticketService;
     }
 
     @GetMapping
@@ -29,6 +34,15 @@ public class EvenementController {
     @PostMapping
     public ResponseEntity<Evenement> create(@Valid @RequestBody Evenement evenement) {
         return new ResponseEntity<>(service.createEvenement(evenement), HttpStatus.CREATED);
+    }
+    @PostMapping("/{event_id}/acheterTicket")
+    public ResponseEntity<Ticket> buyTicket(@PathVariable("event_id") String eventId, @Valid @RequestBody CreateTicket t) {
+        return new ResponseEntity<>(ticketService.buyTicket(eventId,t), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{event_id}/acheterLotTicket")
+    public ResponseEntity<List<Ticket>> buyLotTicket(@PathVariable("event_id") String eventId, @Valid @RequestBody List<CreateTicket> tickets) {
+        return new ResponseEntity<>(ticketService.buyTickets(eventId,tickets), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{uuid}")

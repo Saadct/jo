@@ -1,9 +1,9 @@
 package saad.projet.jo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Evenement {
@@ -14,6 +14,11 @@ public class Evenement {
     private String availableSeats;
 
     private String totalSeats;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="event_id")
+    private List<Ticket> tickets = new ArrayList<>();
+
 
     public String getAvailableSeats() {
         return availableSeats;

@@ -1,12 +1,11 @@
 package saad.projet.jo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Schedule {
@@ -18,7 +17,9 @@ public class Schedule {
     private String date;
     private String time;
 
-
+    @OneToOne
+    @JoinColumn(name="timeSlot_id")
+    private Evenement evenement = new Evenement();
 
     public String getDate() {
         return date;

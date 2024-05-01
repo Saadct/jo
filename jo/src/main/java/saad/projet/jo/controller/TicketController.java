@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import saad.projet.jo.dto.CreateTicket;
 import saad.projet.jo.model.Category;
 import saad.projet.jo.model.Ticket;
 import saad.projet.jo.service.TicketService;
