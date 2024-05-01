@@ -17,4 +17,23 @@ public class Operation {
 
     private Date date;
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

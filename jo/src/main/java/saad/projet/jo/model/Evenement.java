@@ -15,4 +15,23 @@ public class Evenement {
 
     private String totalSeats;
 
+    public String getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public String getTotalSeats() {
+        return totalSeats;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setAvailableSeats(String availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public void setTotalSeats(String totalSeats) {
+        this.totalSeats = totalSeats;
+    }
 }
