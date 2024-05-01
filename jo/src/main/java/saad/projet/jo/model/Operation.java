@@ -5,14 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Date;
+
 @Entity
-public class Ticket {
+public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
 
-    private String price;
+    private String type;
 
-    private String state;
+    private Date date;
 
 }

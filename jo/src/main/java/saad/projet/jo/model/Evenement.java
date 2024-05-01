@@ -6,13 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Ticket {
+public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
 
-    private String price;
+    private String availableSeats;
 
-    private String state;
+    private String totalSeats;
 
 }
