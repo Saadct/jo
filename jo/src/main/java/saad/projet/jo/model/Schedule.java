@@ -15,7 +15,24 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
 
-    private LocalDate date;
-    private LocalTime time;
+    private String date;
+    private String time;
 
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

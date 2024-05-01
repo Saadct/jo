@@ -15,4 +15,19 @@ public class Ticket {
 
     private String state;
 
+    public String getPrice() {
+        return price;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }

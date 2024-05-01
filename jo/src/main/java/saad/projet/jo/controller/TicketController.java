@@ -3,37 +3,36 @@ package saad.projet.jo.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import saad.projet.jo.model.Category;
-import saad.projet.jo.model.Evenement;
-import saad.projet.jo.service.EvenementService;
+import saad.projet.jo.model.Ticket;
+import saad.projet.jo.service.TicketService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/evenements")
-public class EvenementController {
+@RequestMapping("/tickets")
+public class TicketController {
 
-    private final EvenementService service;
+    private final TicketService service;
 
-    public EvenementController(EvenementService service){
+    public TicketController(TicketService service){
         this.service = service;
     }
 
     @GetMapping
-    public ResponseEntity<List<Evenement>> findAll(){
-        return new ResponseEntity<>(service.findAllEvenement(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<Ticket>> findAll(){
+        return new ResponseEntity<>(service.findAllTicket(), HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
-    public ResponseEntity<Evenement> create(@Valid @RequestBody Evenement evenement) {
-        return new ResponseEntity<>(service.createEvenement(evenement), HttpStatus.CREATED);
+    public ResponseEntity<Ticket> create(@Valid @RequestBody Ticket t) {
+        return new ResponseEntity<>(service.createTicket(t), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{uuid}")
     public ResponseEntity<?> delete(@PathVariable String uuid) {
-        if (service.deleteEvenement(uuid)) {
+        if (service.deleteTicket(uuid)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -42,13 +41,12 @@ public class EvenementController {
 
     @PutMapping("/{uuid}")
     public ResponseEntity<?> mettreAJourTotalement(@PathVariable String uuid,
-                                                   @Valid @RequestBody Evenement evenement){
-        if (service.updateEvenement(uuid, evenement)) {
+                                                   @Valid @RequestBody Ticket t){
+        if (service.updateTicket(uuid, t)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 
 }

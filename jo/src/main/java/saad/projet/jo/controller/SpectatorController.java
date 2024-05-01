@@ -3,37 +3,36 @@ package saad.projet.jo.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import saad.projet.jo.model.Category;
-import saad.projet.jo.model.Evenement;
-import saad.projet.jo.service.EvenementService;
+import saad.projet.jo.model.Spectator;
+import saad.projet.jo.service.SpectatorService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/evenements")
-public class EvenementController {
+@RequestMapping("/spectators")
+public class SpectatorController {
 
-    private final EvenementService service;
+    private final SpectatorService service;
 
-    public EvenementController(EvenementService service){
+    public SpectatorController(SpectatorService service){
         this.service = service;
     }
 
     @GetMapping
-    public ResponseEntity<List<Evenement>> findAll(){
-        return new ResponseEntity<>(service.findAllEvenement(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<Spectator>> findAll(){
+        return new ResponseEntity<>(service.findAllSpectator(), HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
-    public ResponseEntity<Evenement> create(@Valid @RequestBody Evenement evenement) {
-        return new ResponseEntity<>(service.createEvenement(evenement), HttpStatus.CREATED);
+    public ResponseEntity<Spectator> create(@Valid @RequestBody Spectator spectator) {
+        return new ResponseEntity<>(service.createSpectator(spectator), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{uuid}")
     public ResponseEntity<?> delete(@PathVariable String uuid) {
-        if (service.deleteEvenement(uuid)) {
+        if (service.deleteSpectator(uuid)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -42,13 +41,11 @@ public class EvenementController {
 
     @PutMapping("/{uuid}")
     public ResponseEntity<?> mettreAJourTotalement(@PathVariable String uuid,
-                                                   @Valid @RequestBody Evenement evenement){
-        if (service.updateEvenement(uuid, evenement)) {
+                                                   @Valid @RequestBody Spectator sp){
+        if (service.updateSpectator(uuid, sp)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
 }

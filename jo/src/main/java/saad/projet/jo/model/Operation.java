@@ -15,7 +15,7 @@ public class Operation {
 
     private String type;
 
-    private Date date;
+    private String date;
 
     public String getUuid() {
         return uuid;
@@ -25,7 +25,7 @@ public class Operation {
         return type;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -33,7 +33,7 @@ public class Operation {
         this.type = type;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
