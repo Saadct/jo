@@ -21,13 +21,6 @@ public class Spectator {
 
     private String password;
 
-    @OneToMany
-    @JoinColumn(name="owner_id")
-    private List<Ticket> tickets = new ArrayList<>();
-
-    @OneToMany
-    @JoinColumn(name="spectator_id")
-    private List<Operation> operations = new ArrayList();
 
 
     public String getName() {

@@ -1,7 +1,9 @@
 package saad.projet.jo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
 
-    private String price;
+    private Float price;
 
     private String state;
 
@@ -24,15 +26,39 @@ public class Ticket {
     @JoinColumn(name = "event_id")
     private Evenement evenement;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Ticket(String name, String firstName,Evenement event,String state) {
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime date = null;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateLastUpdate = null;
+
+    public Ticket() {}
+
+    public Ticket(String name,
+                  String firstName,
+                  Evenement event,
+                  String state,
+                  Float price,
+                  User user,
+                  LocalDateTime date
+
+    )
+    {
         this.name = name;
         this.firstname = firstName;
         this.evenement = event;
         this.state = state;
+        this.price = price;
+        this.user = user;
+        this.date = date;
     }
 
-    public String getPrice() {
+
+    public Float getPrice() {
         return price;
     }
 
@@ -40,7 +66,7 @@ public class Ticket {
         return state;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -50,6 +76,18 @@ public class Ticket {
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public Evenement getEvenement() {
+        return evenement;
+    }
+
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getName() {
@@ -63,4 +101,21 @@ public class Ticket {
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public LocalDateTime getDateUpdate() {
+        return dateLastUpdate;
+    }
+
+    public void setDateUpdate(LocalDateTime dateLastUpdate) {
+        this.dateLastUpdate = dateLastUpdate;
+    }
+
 }

@@ -17,10 +17,6 @@ public class Schedule {
     private String date;
     private String time;
 
-    @OneToOne
-    @JoinColumn(name="timeSlot_id")
-    private Evenement evenement = new Evenement();
-
     public String getDate() {
         return date;
     }

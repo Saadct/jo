@@ -1,5 +1,6 @@
 package saad.projet.jo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import saad.projet.jo.model.Evenement;
@@ -13,10 +14,10 @@ public class OperationService {
 
     private final OperationRepository repository;
 
+    @Autowired
     public OperationService(OperationRepository repository){
         this.repository = repository;
     }
-
 
     public List<Operation> findAllOperation () {
         System.out.println("Toutes les evenements");

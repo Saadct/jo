@@ -1,10 +1,8 @@
 package saad.projet.jo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,13 +13,21 @@ public class Operation {
 
     private String type;
 
-    private String date;
+    private LocalDateTime date;
 
-    public Operation(String type, String date){
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Operation() {}
+
+    public Operation(String type, LocalDateTime date, User user){
         this.type = type;
         this.date = date;
-
+        this.user = user;
     }
+
+
     public String getUuid() {
         return uuid;
     }
@@ -30,7 +36,7 @@ public class Operation {
         return type;
     }
 
-    public String getDate() {
+    public LocalDateTime  getDate() {
         return date;
     }
 
@@ -38,7 +44,7 @@ public class Operation {
         this.type = type;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime  date) {
         this.date = date;
     }
 }

@@ -2,6 +2,7 @@ package saad.projet.jo.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,20 +12,38 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
 
-    private String availableSeats;
 
-    private String totalSeats;
+    private Integer totalSeats;
+
+    private Integer availableSeats;
+
+    private Float standartPrice;
+
+    private String state;
+
+    private String name;
+
+    private LocalDateTime date;
+
+    private LocalDateTime dateLastUpdate;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="event_id")
     private List<Ticket> tickets = new ArrayList<>();
 
+    public Float getStandartPrice() {
+        return standartPrice;
+    }
 
-    public String getAvailableSeats() {
+    public void setStandartPrice(Float standartPrice) {
+        standartPrice = standartPrice;
+    }
+
+    public Integer getAvailableSeats() {
         return availableSeats;
     }
 
-    public String getTotalSeats() {
+    public Integer getTotalSeats() {
         return totalSeats;
     }
 
@@ -32,11 +51,35 @@ public class Evenement {
         return uuid;
     }
 
-    public void setAvailableSeats(String availableSeats) {
+    public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
     }
 
-    public void setTotalSeats(String totalSeats) {
+    public void setTotalSeats(Integer totalSeats) {
         this.totalSeats = totalSeats;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public LocalDateTime getDateLastUpdate() {
+        return dateLastUpdate;
+    }
+
+    public void setDateLastUpdate(LocalDateTime dateLastUpdate) {
+        this.dateLastUpdate = dateLastUpdate;
     }
 }

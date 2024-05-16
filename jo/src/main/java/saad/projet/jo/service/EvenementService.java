@@ -3,12 +3,10 @@ package saad.projet.jo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import saad.projet.jo.model.Category;
 import saad.projet.jo.model.Evenement;
 import saad.projet.jo.repository.EvenementRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EvenementService {
@@ -46,9 +44,7 @@ public class EvenementService {
     }
 
     @Transactional
-    public boolean updateEvenement (String id, Evenement evenement){
-        System.out.println("Evenement créer");
-        System.out.println("evenement supprimée");
+    public Boolean updateEvenement (String id, Evenement evenement){
         Evenement evenementAModifier = findEvenementById(id);
         if(evenementAModifier != null) {
             evenementAModifier.setAvailableSeats(evenement.getAvailableSeats());
@@ -59,4 +55,10 @@ public class EvenementService {
         return false;
     }
 
+    public void updateSeatsAvailable(String uuid, Integer billetCount ) {
+        Evenement evenement = findEvenementById(uuid);
+        Integer availableSeat = evenement.getAvailableSeats() - billetCount;
+        evenement.setAvailableSeats(availableSeat);
+        repository.save(evenement);
+    }
 }

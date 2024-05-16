@@ -37,11 +37,8 @@ public class CategoryService {
 
     @Transactional
     public Boolean update(String uuid, Category category) {
-        System.out.println("Categorie up");
 
         Category categoryAModifier = findCategoryById(uuid);
-        System.out.println("Categorie trouver");
-
         if(categoryAModifier != null) {
             categoryAModifier.setName(category.getName());
             categoryAModifier.setGender(category.getGender());
