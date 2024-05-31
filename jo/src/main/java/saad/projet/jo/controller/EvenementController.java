@@ -13,6 +13,7 @@ import saad.projet.jo.service.EvenementService;
 import saad.projet.jo.service.TicketService;
 
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/evenements")
@@ -32,32 +33,21 @@ public class EvenementController {
 
     @GetMapping
     public ResponseEntity<List<Evenement>> findAll(){
-      //  String token = authorizationHeader.substring(7);
-       // System.out.println(token);
-      //  System.out.println(jwtService.extractUsername(token));
-
         return new ResponseEntity<>(service.findAllEvenement(), HttpStatus.FOUND);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/available")
     public ResponseEntity<List<Evenement>> findAllEvenementAvailable(){
-        //  String token = authorizationHeader.substring(7);
-        // System.out.println(token);
-        //  System.out.println(jwtService.extractUsername(token));
-
         return new ResponseEntity<>(service.findAllEvenementByState("Available"), HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Evenement> findById(@PathVariable("id") String id, @RequestHeader("Authorization") String authorizationHeader){
-        //  String token = authorizationHeader.substring(7);
-        // System.out.println(token);
-        //  System.out.println(jwtService.extractUsername(token));
-
         return new ResponseEntity<>(service.findEvenementById(id), HttpStatus.FOUND);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody CreateEvent evenement, @RequestHeader("Authorization") String token) {
         if(service.createEvenement(evenement, jwtService.extractEmail(token))){
@@ -77,6 +67,7 @@ public class EvenementController {
         }
     }
  */
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/{event_id}/acheterTicket")
     public ResponseEntity<String> buyTicket(@PathVariable("event_id") String eventId,
                                             @Valid @RequestBody CreateTicket ticket,
@@ -88,7 +79,7 @@ public class EvenementController {
         }
 
     }
-
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/{event_id}/acheterLotTicket")
     public ResponseEntity<String> buyLotTicket(@PathVariable("event_id") String eventId,
                                                @Valid @RequestBody List<CreateTicket> tickets,
@@ -100,20 +91,21 @@ public class EvenementController {
         }
 
     }
-
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/{event_id}/bookTicket")
     public ResponseEntity<String> bookTicket(@PathVariable("event_id") String eventId,
                                                @Valid @RequestBody CreateTicket ticket,
                                                @RequestHeader("Authorization") String token) {
         //       return new ResponseEntity<>(ticketService.buyTickets(eventId,tickets), HttpStatus.CREATED);
         if (ticketService.bookTicket(eventId, ticket, jwtService.extractEmail(token))) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Il n'y a plus de places disponibles pour cet événement.", HttpStatus.NOT_ACCEPTABLE);
         }
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{event_id}/improveSeats")
     public ResponseEntity<String> improveSeats(@PathVariable("event_id") String eventId,
                                              @Valid @RequestBody Integer seats,
@@ -127,6 +119,7 @@ public class EvenementController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{event_id}/cancelEvent")
     public ResponseEntity<String> cancelEvent(@PathVariable("event_id") String eventId,
                                                @RequestHeader("Authorization") String token) {
@@ -139,7 +132,7 @@ public class EvenementController {
 
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{uuid}")
     public ResponseEntity<?> delete(@PathVariable String uuid) {
         if (service.deleteEvenement(uuid)) {
@@ -148,7 +141,7 @@ public class EvenementController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{uuid}")
     public ResponseEntity<?> mettreAJourTotalement(@PathVariable String uuid,
                                                    @Valid @RequestBody CreateEvent evenement,

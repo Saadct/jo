@@ -1,9 +1,11 @@
 # List des routes de l'api des jo
 
-ceci est un gestionaire par api des epreuves des jo avec en bonus des tests unitaires.
+Ceci est un gestionaire par api des epreuves des jo avec en bonus des tests unitaires.
 
 
 Selon les droits et les roles attribué certaines routes ne sont pas disponible pour tous
+
+faire aussi attention j'ai fait beaucoup de controles au niveau des creations et mises a jours
 
 ## Public
 
@@ -19,7 +21,7 @@ body:
 ```
 {
     "email": "test@gmail.com",
-    "password": "test",
+    "password": "Test91!eeee",
     "fullName": "efrei"
 }
 ```
@@ -38,11 +40,11 @@ body:
 ```
 {
     "email": "test@gmail.com",
-    "password": "test",
+    "password": "Test91!eeee",
 }
 ```
 
-Par default toute les personnes qui s'inscrivent
+Par default toute les personnes qui s'inscrivent sont en user
 
 ## Evenement
 Pour avoir une liste d'evenement .

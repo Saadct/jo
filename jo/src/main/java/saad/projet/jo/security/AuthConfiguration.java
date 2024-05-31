@@ -36,9 +36,13 @@ public class AuthConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests.
                         requestMatchers(new AntPathRequestMatcher("/evenements")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/evenements/**")).hasAnyAuthority("USER")
+                  //      .requestMatchers(new AntPathRequestMatcher("/evenements/**")).hasAnyAuthority("USER")
                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/operations/**")).hasAnyAuthority("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/evenements")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/categories")).hasAnyAuthority("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/spectators")).hasAnyAuthority("ADMIN")
 
                 )//.anyRequest().authenticated())
                 //    requests.requestMatchers(new AntPathRequestMatcher("/students/**")).hasAuthority("ADMIN"))
