@@ -103,6 +103,9 @@ http://localhost:8080/evenements/{uuid}
 Pour le role user voici les routes disponibles.
 #### Ticket
 
+faire attention si un evenement n'as plus de place disponible vous ne pouvez pas achetez de ticket
+
+
 *method POST*
 
 acheter un ticket
