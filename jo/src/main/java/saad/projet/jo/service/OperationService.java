@@ -3,20 +3,26 @@ package saad.projet.jo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import saad.projet.jo.constants.State;
 import saad.projet.jo.model.Evenement;
 import saad.projet.jo.model.Operation;
+import saad.projet.jo.model.User;
 import saad.projet.jo.repository.OperationRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class OperationService {
 
     private final OperationRepository repository;
+    private final UserService userService;
 
     @Autowired
-    public OperationService(OperationRepository repository){
+    public OperationService(OperationRepository repository, UserService userService)
+    {
         this.repository = repository;
+        this.userService = userService;
     }
 
     public List<Operation> findAllOperation () {
@@ -57,5 +63,18 @@ public class OperationService {
         }
         return false;
     }
+
+    @Transactional
+    public boolean recordAction (String actionType, LocalDateTime date, String email){
+        User user = userService.findByEmail(email);
+        if(user != null) {
+            Operation op = new Operation(actionType, date, user);
+            repository.save(op);
+            return true;
+        }
+        return false;
+        }
+
+
 
 }

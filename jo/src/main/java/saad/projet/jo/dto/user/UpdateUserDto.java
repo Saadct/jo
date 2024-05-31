@@ -1,15 +1,10 @@
-package saad.projet.jo.dto;
-
+package saad.projet.jo.dto.user;
 import jakarta.validation.constraints.*;
 
-import saad.projet.jo.validator.StrongPassword;
-
-public class RegisterDto {
-
+public class UpdateUserDto {
     @Email(message = "Veuillez fournir une adresse e-mail valide.")
     private String email;
 
-    @StrongPassword
     private String password;
 
     @Pattern(regexp = "^[a-zA-Z0-9 ]+$", message = "Le nom complet ne doit contenir que des lettres, des chiffres et des espaces.")
@@ -38,4 +33,5 @@ public class RegisterDto {
     public String getEmail() {
         return email;
     }
+
 }

@@ -36,4 +36,6 @@ public class UserServiceTest {
         assertNotNull(result);
         assertEquals("asaad.test@test.com", result.getEmail());
     }
+
+
 }

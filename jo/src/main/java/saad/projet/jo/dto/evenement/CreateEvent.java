@@ -1,38 +1,48 @@
-package saad.projet.jo.model;
+package saad.projet.jo.dto.evenement;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+@Getter
+@Setter
+public class CreateEvent {
 
-@Entity
-public class Evenement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private String sportId;
+
     private String state;
+
+    @NotBlank
+    @Size(min=1 , max=25)
+    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Le nom ne doit contenir que des lettres et des chiffres.")
     private String name;
+
+    @NotNull(message = "Le nombre total de sièges ne doit pas être nul.")
+    @PositiveOrZero(message = "Le nombre total de sièges doit être positif ou égal à zéro.")
     private Integer totalSeats;
+
+    @NotNull(message = "Le nombre disponible de sièges ne doit pas être nul.")
+    @PositiveOrZero(message = "Le nombre disponible de sièges doit être positif ou égal à zéro.")
     private Integer availableSeats;
+
+    @NotNull
+    @Digits(integer = 10, fraction = 2, message = "Le prix standard doit être un nombre valide avec au maximum 10 chiffres et 2 chiffres après la virgule.")
     private Double standartPrice;
+
+
+  //  @NotNull(message = "La date de l'événement ne doit pas être nulle.")
+    @FutureOrPresent(message = "La date de l'événement doit être dans le présent ou dans le futur.")
     private LocalDate dateEvent;
+
+    @NotNull(message = "L'heure de début ne doit pas être nulle.")
     private LocalTime hourBegin;
+
+    @NotNull(message = "L'heure de fin ne doit pas être nulle.")
     private LocalTime hourEnding;
-    private LocalDateTime dateCreate;
-    private LocalDateTime dateLastUpdate;
 
-    @ManyToOne
-    @JoinColumn(name = "sport_id")
-    private Category category;
 
-    @OneToMany
-    @JoinColumn(name="event_id")
-    private List<Ticket> tickets = new ArrayList<>();
 
     public Double getStandartPrice() {
         return standartPrice;
@@ -50,9 +60,6 @@ public class Evenement {
         return totalSeats;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
 
     public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
@@ -68,22 +75,6 @@ public class Evenement {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public LocalDateTime getDateCreate() {
-        return dateCreate;
-    }
-
-    public void setDateCreate(LocalDateTime dateCreate) {
-        this.dateCreate = dateCreate;
-    }
-
-    public LocalDateTime getDateLastUpdate() {
-        return dateLastUpdate;
-    }
-
-    public void setDateLastUpdate(LocalDateTime dateLastUpdate) {
-        this.dateLastUpdate = dateLastUpdate;
     }
 
     public LocalTime getHourBegin() {
@@ -118,12 +109,12 @@ public class Evenement {
         return name;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getSportId() {
+        return sportId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setSportId(String sportId) {
+        this.sportId = sportId;
     }
-
 }
+

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import saad.projet.jo.constants.Role;
+import saad.projet.jo.validator.StrongPassword;
 
 import java.util.*;
 
@@ -29,6 +30,7 @@ public class User implements UserDetails {
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
+    //@StrongPassword
     @Column(nullable = false)
     private String password;
 
@@ -116,11 +118,23 @@ public class User implements UserDetails {
         this.fullName = fullName;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 }

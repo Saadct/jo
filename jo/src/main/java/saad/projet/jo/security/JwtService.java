@@ -88,8 +88,8 @@ public class JwtService {
     }
 
     public String extractEmail(String token) {
+        token = token.substring(7);
         Claims claims = extractAllClaims(token);
-        // Insérez le nom de la revendication où l'ID de l'utilisateur est stocké
         return claims.get("sub").toString();
     }
 

@@ -37,6 +37,9 @@ public class AuthConfiguration {
                 .authorizeHttpRequests(requests -> requests.
                         requestMatchers(new AntPathRequestMatcher("/evenements")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/evenements/**")).hasAnyAuthority("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll()
+
                 )//.anyRequest().authenticated())
                 //    requests.requestMatchers(new AntPathRequestMatcher("/students/**")).hasAuthority("ADMIN"))
                 //           .requestMatchers(new AntPathRequestMatcher("/api/**")).hasAnyAuthority("USER", "ADMIN")

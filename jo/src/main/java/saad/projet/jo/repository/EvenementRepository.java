@@ -11,6 +11,9 @@ import java.util.Optional;
 public interface EvenementRepository extends JpaRepository <Evenement, String>{
     List<Evenement> findAll();
 
+    List<Evenement> findByState(String state);
+
     Optional<Evenement> findOneByUuid(String uuid);
+
 
 }

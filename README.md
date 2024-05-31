@@ -1,5 +1,8 @@
 # List des routes de l'api des jo
 
+ceci est un gestionaire par api des epreuves des jo avec en bonus des tests unitaires.
+
+
 Selon les droits et les roles attribué certaines routes ne sont pas disponible pour tous
 
 ## Public
@@ -41,13 +44,57 @@ body:
 
 Par default toute les personnes qui s'inscrivent
 
-### Evenement
+## Evenement
 Pour avoir une liste d'evenement .
 
 *route GET*
 ```
 http://localhost:8080/evenements
 ```
+
+Créer un evenement methode Post
+```
+http://localhost:8080/evenements
+```
+
+body exemple
+```
+        {
+        "totalSeats": 10,  
+        "availableSeats": 10,    
+        "standartPrice": 2.2,
+        "name": "evenement",
+        "dateEvent": "2024-12-31",
+        "hourBegin": "08:30:00",
+        "hourEnding": "17:00:00"
+    }
+    
+```
+
+Update totalement un evenement methode put
+```
+http://localhost:8080/evenements/{uuid}
+```
+
+body exemple
+```
+        {
+        "totalSeats": 10,  
+        "availableSeats": 10,    
+        "standartPrice": 2.2,
+        "name": "evenement",
+        "dateEvent": "2024-12-31",
+        "hourBegin": "08:30:00",
+        "hourEnding": "17:00:00"
+    }
+    
+```
+
+Supprimer un evenement methode DELETE
+```
+http://localhost:8080/evenements/{uuid}
+```
+
 
 ## User
 
@@ -84,15 +131,9 @@ http://localhost:8080/tickets/{ticketId}/paidBookTicket
 *method POST*
 
 
-
-acheter un lot de ticket
+acheter un lot de ticket avec different promotion en fonction du nombre de place
 ```
 http://localhost:8080/evenements/{eventId}/acheterLotTicket
-```
-
-acheter un lot de ticket promotion
-```
-http://localhost:8080/evenements/{eventId}/acheterLotTicketPromo
 ```
 
 body:
@@ -117,5 +158,75 @@ body:
 ]
 ```
 
+
+
+#### Profil
+
+consulter son profil method get
+
+```
+http://localhost:8080/users/informations/{id}
+```
+
+
+modifier ses informations  methode put
+```
+http://localhost:8080/users/{id}
+```
+
+body
+```
+{
+    "email": "10",  
+    "fullName": "test"    
+}
+```
+
+
+modifier son mot de passe   methode patch
+```
+http://localhost:8080/users/{id}/updatePassword
+```
+
+body
+```
+{
+"password": "Test91450!"
+}
+```
+
+consulter son historique  methode get
+```
+http://localhost:8080/users/tickets/{uuid}
+```
+
+## Admin
+
+#augmenter le nombre total de billets,
+
+Post 
+```
+http://localhost:8080/evenements/{eventId}/improveSeats
+```
+body (on augmente de 12 par exemple)
+```
+seats = 12
+```
+
+ceci en bas sont ceux que je n'ai aps eu le temps de faire serieusement ni tester
+
+annuler un evenement  #fait a testet
+
+
+créer un user # fait a tester
+
+changer les information d'un user #fait a tester
+changer le role d'un user a admin #fait a tester
+
+
+
+## SuperAdmin
+
+herite de admin sauf qu'il peux en plus changer le role d'un admin et supprimer un admin
 
 

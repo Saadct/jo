@@ -13,7 +13,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
 
-    private Float price;
+    private Double price;
 
     private String state;
 
@@ -42,7 +42,7 @@ public class Ticket {
                   String firstName,
                   Evenement event,
                   String state,
-                  Float price,
+                  Double price,
                   User user,
                   LocalDateTime date
 
@@ -58,7 +58,7 @@ public class Ticket {
     }
 
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -66,7 +66,7 @@ public class Ticket {
         return state;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -117,5 +117,6 @@ public class Ticket {
     public void setDateUpdate(LocalDateTime dateLastUpdate) {
         this.dateLastUpdate = dateLastUpdate;
     }
+
 
 }

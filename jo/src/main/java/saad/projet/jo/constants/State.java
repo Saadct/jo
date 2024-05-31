@@ -8,5 +8,6 @@ public enum State {
     Reservation_Ticket,
     Achat_Unique_Ticket,
     Achat_Lot_Ticket,
+    Augmentation_place_total
 
 }
